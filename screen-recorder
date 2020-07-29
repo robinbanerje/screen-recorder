@@ -1,0 +1,18 @@
+#screen recorder
+      
+import numpy as np                                                     #to handle data
+import cv2                                                             #for image processing i.e create video output
+from PIL import ImageGrab as ig                                        #record video by grabbing pixel frames
+fourcc=cv2.VideoWriter_fourcc(*'XVID')                                 # four character code object for video writer
+out=cv2.VideoWriter("output.avi", fourcc, 5.0, (1366, 768))            # video writer object
+while True:                                                            #to create infinite loop untill pressed 'esc' 
+img = ig.grab()                                                        # capture computer screen
+img_np = np.array(img)                                                 # convert image to numpy array
+frame = cv2.cvtColor(img_np, cv2.COLOR_BGR2RGB)                        # convert color space from BGR to
+RGB
+cv2.imshow("Screen", frame)                                            # show image on OpenCV frame
+out.write(frame)                                                       # write frame to video writer
+ if cv2.waitKey(1)==27:
+ break
+out.release()
+cv2.destroyAllWindows()
